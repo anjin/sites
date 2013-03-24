@@ -1,0 +1,3 @@
+Just starting
+
+heroku run make_admin email=[email]

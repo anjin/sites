@@ -1,0 +1,17 @@
+#admin
+  .wrapper
+    %h2 
+      Tags
+      %span= link_to '(New Tag)', new_tag_path
+
+    %table.adminIndexTable
+      %tr
+        %th Name
+        %th
+
+      - @tags.each do |tag|
+        %tr
+          %td= tag.name
+          %td
+            = link_to 'Edit', edit_tag_path(tag)
+            = link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' }

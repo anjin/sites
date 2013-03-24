@@ -1,0 +1,956 @@
+
+@font-face
+  font-family: 'FontAwesome'
+  src: url('/assets/fontawesome-webfont.eot?v=3.0.1')
+  src: url('/assets/fontawesome-webfont.eot?#iefix&v=3.0.1') format("embedded-opentype"), url('/assets/fontawesome-webfont.woff?v=3.0.1') format("woff"), url('/assets/fontawesome-webfont.ttf?v=3.0.1') format("truetype")
+  font-weight: normal
+  font-style: normal
+  
+
+// RESET ------------------------------------------------------------
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+  border: 0
+  color: #3d362e
+  font-family: 'proxima-nova', sans-serif
+  font-style: inherit
+  font-weight: normal
+  line-height: 1
+  margin: 0
+  outline: 0
+  padding: 0
+
+ol, ul
+  list-style: none
+
+pre
+  white-space: pre-wrap
+  white-space: -moz-pre-wrap
+  white-space: -pre-wrap
+  white-space: -o-pre-wrap
+  word-wrap: break-word
+
+table
+  border-collapse: separate
+  border-spacing: 0
+  position: relative
+
+button::-moz-focus-inner
+  border: 0
+  padding: 0
+
+caption, th, td
+  text-align: left
+  font-weight: normal
+
+blockquote
+  &:before, &:after
+    content: ""
+
+q
+  &:before, &:after
+    content: ""
+
+blockquote, q
+  quotes: "" ""
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section
+  display: block
+
+strong
+  font-family: 'proxima-nova', sans-serif
+  font-weight: bold
+
+a
+  font-size: inherit
+
+span
+  color: inherit
+  font-family: inherit
+  font-size: inherit
+  font-weight: inherit
+
+
+// MIXINS -----------------------------------------------------------
+
+@mixin boxShad($bsHoriz, $bsVert, $bsBlur, $bsSpread, $bsColor)
+  -webkit-box-shadow: $bsHoriz $bsVert $bsBlur $bsSpread $bsColor
+  -moz-box-shadow: $bsHoriz $bsVert $bsBlur $bsSpread $bsColor
+  box-shadow: $bsHoriz $bsVert $bsBlur $bsSpread $bsColor
+
+@mixin boxShadIn($bsHoriz, $bsVert, $bsBlur, $bsSpread, $bsColor)
+  -webkit-box-shadow: $bsHoriz $bsVert $bsBlur $bsSpread $bsColor inset
+  -moz-box-shadow: $bsHoriz $bsVert $bsBlur $bsSpread $bsColor inset
+  box-shadow: $bsHoriz $bsVert $bsBlur $bsSpread $bsColor inset
+
+@mixin boxShadDoub($bxHoriz, $bxVert, $bxBlur, $bxSpread, $bxColor, $byHoriz, $byVert, $byBlur, $bySpread, $byColor)
+  -webkit-box-shadow: $bxHoriz $bxVert $bxBlur $bxSpread $bxColor, $byHoriz $byVert $byBlur $bySpread $byColor inset
+  -moz-box-shadow: $bxHoriz $bxVert $bxBlur $bxSpread $bxColor, $byHoriz $byVert $byBlur $bySpread $byColor inset
+  box-shadow: $bxHoriz $bxVert $bxBlur $bxSpread $bxColor, $byHoriz $byVert $byBlur $bySpread $byColor inset
+
+@mixin borderRad($bR)
+  -webkit-border-radius: $bR
+  -moz-border-radius: $bR
+  border-radius: $bR
+  
+@mixin borderRadUneven($brTL, $brTR, $brBR, $brBL)
+  -moz-border-radius-topleft: $brTL
+  -moz-border-radius-topright: $brTR
+  -moz-border-radius-bottomright: $brBR
+  -moz-border-radius-bottomleft: $brBL
+  -webkit-border-radius: $brTL $brTR $brBR $brBL
+  border-radius: $brTL $brTR $brBR $brBL
+
+@mixin gradBG($bgStart, $bgStop)
+  background: $bgStart
+  background: -moz-linear-gradient(top, $bgStart 0%, $bgStop 100%)
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$bgStart), color-stop(100%,$bgStop))
+  background: -webkit-linear-gradient(top, $bgStart 0%,$bgStop 100%)
+  background: -o-linear-gradient(top, $bgStart 0%,$bgStop 100%)
+  background: -ms-linear-gradient(top, $bgStart 0%,$bgStop 100%)
+  background: linear-gradient(top, $bgStart 0%,$bgStop 100%)
+
+@mixin css3transition($property, $duration, $type: linear)
+  transition: $property $duration $type
+  -moz-transition: $property $duration $type
+  -webkit-transition: $property $duration $type
+  -o-transition: $property $duration $type
+  
+@mixin sans
+  font-family: 'proxima-nova', sans-serif
+
+@mixin clearfix
+  &:after
+    content: "."
+    display: block
+    clear: both
+    visibility: hidden
+    line-height: 0
+    height: 0
+
+
+// Font Awesome styles -------------------------------------------------------
+
+[class^="icon-"],
+[class*=" icon-"]
+  font-family: FontAwesome
+  font-weight: normal
+  font-style: normal
+  text-decoration: inherit
+  -webkit-font-smoothing: antialiased
+
+  /* sprites.less reset */
+  display: inline
+  width: auto
+  height: auto
+  line-height: normal
+  vertical-align: baseline
+  background-image: none
+  background-position: 0% 0%
+  background-repeat: repeat
+  margin-top: 0
+
+/* more sprites.less reset */
+.icon-white,
+.nav-pills > .active > a > [class^="icon-"],
+.nav-pills > .active > a > [class*=" icon-"],
+.nav-list > .active > a > [class^="icon-"],
+.nav-list > .active > a > [class*=" icon-"],
+.navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"],
+.dropdown-submenu:hover > a > [class^="icon-"],
+.dropdown-submenu:hover > a > [class*=" icon-"]
+  background-image: none
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before
+  text-decoration: inherit
+  display: inline-block
+  speak: none
+
+/* makes sure icons active on rollover in links */
+a
+  [class^="icon-"],
+  [class*=" icon-"]
+    display: inline-block
+
+/* makes the font 33% larger relative to the icon container */
+.icon-large:before
+  vertical-align: -10%
+  font-size: 1.3333333333333333em
+
+.btn, .nav
+  [class^="icon-"],
+  [class*=" icon-"]
+    display: inline
+    /* keeps button heights with and without icons the same */
+    &.icon-large
+      line-height: .9em
+    &.icon-spin
+      display: inline-block
+
+.nav-tabs, .nav-pills
+  [class^="icon-"],
+  [class*=" icon-"]
+    /* keeps button heights with and without icons the same */
+    line-height: .9em
+    &.icon-large
+      line-height: .9em
+
+li, .nav li
+  [class^="icon-"],
+  [class*=" icon-"]
+    display: inline-block
+    width: 1.25em
+    text-align: center
+    &.icon-large
+      /* increased font size for icon-large */
+      width: 1.5625em
+
+ul.icons
+  list-style-type: none
+  text-indent: -.75em
+  li
+    [class^="icon-"],
+    [class*=" icon-"]
+      width: .75em
+
+
+// COLORS -----------------------------------------------------------
+$red: #ee623a
+$blue: #6d96b6
+$lblue: #8cc8ef
+$dblue: #5C7E99
+$bg: #efefef
+$grey: #c3bcac
+
+
+// GLOBAL -----------------------------------------------------------
+html
+  background-color: #efefef
+  background-image: url(bg.gif)
+  height: 100%
+
+body
+  background-position: center top
+  background-repeat: repeat-x
+  height: 100%
+
+.container
+  min-height: 100%
+
+.container_footer
+  padding-bottom: 100px
+
+
+h1, h2, h3, h4, h5, h6
+  @include sans
+  font-weight: normal
+  line-height: normal
+  position: relative
+
+h1
+  color: #333
+  font-size: 30px
+  font-weight: 100
+  padding-bottom: 30px
+  text-shadow: 0 1px 0 rgba(#fff, 0.6)
+  a
+    color: inherit
+    font-size: inherit
+    font-weight: inherit
+    text-shadow: 0 1px 0 rgba(#fff, 0.6)
+    text-decoration: none
+    &:hover
+      color: $blue
+  span
+    color: $blue
+    font-size: inherit
+  .dateTime
+    color: #999
+    font-size: 13px
+    padding-top: 20px
+    
+h2
+  color: $blue
+  font-size: 30px
+  font-weight: 100
+  padding: 10px 0
+  text-shadow: 0 1px 0 rgba(#fff, 0.4)
+  span, a
+    color: #333
+    font-size: 14px
+    &:hover
+      color: $red
+  input[type="submit"]
+    float: right
+  
+h3
+  color: #333
+  font-size: 16px
+  span
+    color: $red
+    display: block
+    font-size: 90%
+    font-weight: bold
+
+h4
+  color: #333
+  font-size: 16px
+  font-weight: 700
+  line-height: 1
+
+h5
+  color: #333
+  font-size: 24px
+
+h6
+
+hr
+  background: rgba(0,0,0,0)
+  border: 1px solid #ccc
+  border-width: 3px 0 1px
+  height: 6px
+  margin: 0 0 60px
+
+textarea,
+select,
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"]
+  @include boxShadIn(0, 3px, 3px, 0, rgba(#000,0.1))
+  @include sans
+  border: 1px solid #bbb
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  font-size: 13px
+  padding: 6px 5px 5px
+
+textarea
+  min-height: 70px
+  padding: 3px 5px
+
+.actions
+  padding: 20px 0 0
+  text-align: right
+
+input[type="submit"], button, .btn
+  @include boxShad(0, 2px, 0, 0, rgba(#000,0.2))
+  @include sans
+  background-color: #cecece
+  border: 0
+  color: #fff
+  cursor: pointer
+  display: inline-block
+  font-size: 14px
+  line-height: 14px
+  padding: 7px 15px 5px
+  text-decoration: none
+  &:hover
+    background: $blue
+    color: #fff
+  &.btn-red
+    background-color: $red
+    &:hover
+      background-color: #cecece
+
+.dropbtn
+  @include boxShadIn(0,0,0,1px, #fff)
+  border: 1px solid #cecece
+  color: #888
+  cursor: pointer
+  display: inline-block
+  font-size: 14px
+  padding: 6px 60px 6px 15px
+  position: relative
+  &:after
+    content: "▼"
+    color: #999
+    font-size: 12px
+    position: absolute
+    right: 10px
+    top: 8px
+  &:hover, &.open
+    background-color: rgba(#cecece,0.3)
+    color: #333
+    .dropMenu
+      display: block
+  .dropMenu
+    display: none
+    min-width: 100%
+    padding-top: 28px
+    position: absolute
+    right: 0
+    top: 0
+    z-index: 99
+    ul
+      @include boxShad(0,2px,0,0,rgba(#000,0.3))
+      background-color: $lblue
+    li
+      float: none !important
+      margin: 0 !important
+      &:first-child
+        a
+          @include boxShadIn(0,0,0,0,rgba(#fff,0))
+          border-top: 0
+    a
+      @include boxShadIn(0,1px,0,0,rgba(#fff,0.1))
+      border-top: 1px solid rgba(#000,0.03)
+      color: #fff
+      display: block
+      padding: 6px 20px 6px 16px
+      text-align: left
+      text-decoration: none
+      &:hover
+        background: rgba(#fff, 0.2)
+        color: #333
+
+.field
+  label
+    padding-top: 20px
+
+label
+  color: #333
+  display: block
+  font-size: 12px
+  padding-bottom: 3px
+  text-transform: uppercase
+  &.checkLabel
+    cursor: pointer
+    padding-top: 3px
+    &:hover
+      color: $red
+  &.inlineLabel
+    display: inline
+    input
+      margin: -2px 10px 0 0
+    &:hover
+      color: #666
+      cursor: pointer
+
+table
+  width: 100%
+  td, th
+    padding: 5px
+  th
+    font-style: italic
+    opacity: 0.5
+
+.billboardMulti, .bigSideContent, .bigSideAside
+  p
+    font-size: 13px
+    line-height: 20px
+  p ~ p
+    padding-top: 10px !important
+
+.clear
+  clear: both
+  float: none
+
+.clearfix:after
+  @include clearfix
+
+.warning
+  color: red !important
+
+.wrapper
+  margin: auto
+  position: relative
+  width: 980px
+  &:after
+    content: "."
+    display: block
+    clear: both
+    visibility: hidden
+    line-height: 0
+    height: 0
+
+.flexWrapper
+  max-width: 1550px
+  min-width: 940px
+  padding: 0 20px
+  position: relative
+
+.dialog
+  @include boxShad(0,3px,0,0,rgba(#000,0.2))
+  background-color: $lblue
+  margin: 40px auto
+  padding: 20px
+  position: relative
+  width: 300px
+  h1
+    color: #fff
+    font-size: 32px
+    text-shadow: 0 -1px 0 rgba(#333, 0.1)
+  a
+    color: #fff
+    font-size: 13px
+    &:hover
+      color: $dblue
+  textarea,
+  select,
+  input[type="date"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"]
+    width: 100%
+
+#error_explanation
+  background-color: rgba(#fff, 0.6)
+  margin: 0 -20px
+  padding: 10px 20px
+  h2
+    color: $red
+    font-size: 15px
+    padding-top: 0
+  li
+    color: #5C7E99
+    font-size: 13px
+    padding: 2px
+
+.notice
+  @include boxShad(0, 2px, 0, 0, rgba(#000,0.5))
+  background-color: rgba(#333, 0.5)
+  color: #fff
+  margin-bottom: 40px
+  padding: 10px 20px
+
+
+.articleSnip, .articleTops
+  overflow: hidden
+  position: relative
+  .articleSnipThumb
+    background-color: #333
+    overflow: hidden
+    text-align: center
+  a
+    text-decoration: none
+    &:hover h4
+      color: $red
+  p 
+    line-height: 1.2
+    span
+      display: block
+      font-style: italic
+      opacity: 0.7
+      padding-top: 10px
+
+.sectionTops
+  padding-top: 40px
+  h5
+    padding-bottom: 20px
+  .articleTops
+    .articleSnipThumb
+      float: left
+      margin-right: 10px
+      height: 80px
+      width: 80px
+    p span
+      font-size: 13px
+      padding-top: 2px
+    .commentCount 
+      float: right
+      padding-top: 5px
+  .articleTops ~ .articleTops
+    margin-top: 10px
+
+.sectionTopsRow
+  overflow: hidden
+  .sectionTops
+    float: left
+    width: 300px
+  .sectionTops ~ .sectionTops
+    margin-left: 18px
+
+.commentCount
+  font-size: 16px
+  text-decoration: none
+  &:hover
+    color: $red !important
+  
+i
+  display: inline-block
+  font-family: 'FontAwesome'
+  &.icon-comments:before
+    content: "\f086"
+
+
+// HEADER -----------------------------------------------------------
+
+#header
+  .flexWrapper
+    padding: 20px 20px 35px
+  #logo
+    margin-left: 10px
+  #menu
+    float: right
+    padding: 10px 10px 0 0
+    li
+      float: left
+      margin-left: 20px
+  #userMenu
+    position: absolute
+    right: 30px
+    top: 10px
+    li
+      color: rgba(#666, 0.6)
+      float: left
+      font-size: 12px
+      margin-left: 20px
+      text-shadow: 0 1px 0 rgba(#fff, 0.4)
+      text-transform: uppercase
+    a
+      color: inherit
+      font-size: inherit
+      text-decoration: none
+      text-shadow: 0 1px 0 rgba(#fff, 0.4)
+      text-transform: uppercase
+      &:hover
+        color: rgba(#666, 1)
+
+
+
+// FOOTER -----------------------------------------------------------
+
+#footer
+  background-color: #cecece
+  border-top: 3px solid #aaa
+  color: #333
+  font-size: 13px
+  margin-top: -35px
+  padding: 10px 0
+  .flexWrapper
+    color: inherit
+
+
+// SIDE  LAYOUTS --------------------------------------------------
+
+.bigSideContent
+  float: left
+  padding: 40px 0
+  position: relative
+  width: 620px
+
+.bigSideAside
+  float: right
+  padding: 40px 0
+  position: relative
+  width: 300px
+  .adSmRect ~ .adLarge
+    margin-top: 20px
+
+
+// CATEGORY INDEX ---------------------------------------------------
+
+#catIndex
+  h2
+    line-height: 1
+    padding-top: 0
+  .bigSideContent
+    .articleSnip
+      height: 150px
+      overflow: hidden
+      .articleSnipThumb
+        float: left
+        height: 150px
+        margin-right: 20px
+        width: 220px
+      h4
+        font-size: 24px
+        line-height: 24px
+      p
+        padding-top: 5px
+      .commentCount
+        bottom: 0
+        position: absolute
+        left: 240px
+        z-index: 9
+    .articleSnip ~ .articleSnip
+      margin-top: 20px
+
+
+// ASIDE STYLE  ----------------------------------------------------
+
+.bigSideAside h3
+  font-size: 20px
+  padding-bottom: 10px
+
+.asideBioPic
+  @include borderRad(9999px)
+  height: 200px
+  margin: 5px 0 30px
+  overflow: hidden
+  width: 200px
+  img
+    margin-left: -25%
+  
+
+// ARTICLE PAGES ----------------------------------------------------
+
+.articleBanner
+  height: 530px
+  margin-bottom: 40px
+  overflow: hidden
+  position: relative
+  width: 100%
+  h1
+    position: absolute
+    bottom: 30px
+    text-align: center
+    width: 100%
+  img
+    display: block
+    min-width: 1024px 
+    width: 100%
+
+.articleVideo
+  background-color: #333
+  height: 530px
+  margin-bottom: 40px
+
+.articleInfo
+  border: 1px solid rgba(#333, 0.2)
+  border-width: 1px 0
+  margin: 20px 0
+  padding: 25px 0 18px
+  &:after
+    content: "."
+    display: block
+    clear: both
+    visibility: hidden
+    line-height: 0
+    height: 0
+  &:first-child
+    padding-top: 0
+  a
+    &:hover
+      color: $red
+  .articleByline
+    display: inline-block
+    font-size: 16px
+    font-weight: 700
+    text-decoration: none
+    text-transform: uppercase
+    .gravatar
+      background-color: #333
+      float: left
+      height: 32px
+      margin: -7px 10px 0 0
+      width: 32px
+  span
+    margin-left: 60px
+  ul, li
+    display: inline-block
+    margin-left: 60px
+  li
+    margin-left: 5px
+  .commentCount
+    float: right
+    margin-top: -2px
+
+.postContent, #prevContent
+  padding-bottom: 20px
+  p, q, p a
+    line-height: 1.6
+    padding-top: 15px
+  p:first-child
+    padding-top: 0
+  p a
+    &:hover
+      color: $red
+  q
+    display: block
+    font-style: italic
+    font-size: 15px
+    padding: 25px 40px 10px
+
+.picsContent
+  img
+    display: block
+    margin-top: 15px
+    width: 720px
+  em
+    display: block
+    font-size: 16px
+    font-style: italic
+    padding-top: 5px
+
+
+// HOMEPAGE ---------------------------------------------------------
+
+.billboard
+  margin: auto
+  max-width: 1600px
+  min-width: 940px
+  padding-bottom: 20px
+  position: relative
+  &:after
+    content: "."
+    display: block
+    clear: both
+    visibility: hidden
+    line-height: 0
+    height: 0
+  &.billboardFull
+    padding: 0 20px
+    margin-bottom: 20px
+    max-width: 1560px
+    min-width: 940px
+    h2
+      font-size: 52px
+      padding-top: 11%
+      position: absolute
+      text-align: center
+      width: 100%
+.billboardWr
+  max-width: 1600px
+  overflow: hidden
+  padding: 0 10px
+
+.billboardImage
+  overflow: hidden
+  position: relative
+  text-align: center
+  img
+    width: 100%
+
+.billboardMulti
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  float: left
+  margin: 0px
+  &.billboardThree
+    padding: 0 10px
+    width: 33.333%
+  &.billboardFour
+    float: right
+    padding: 0 10px 15px
+    width: 22%
+    &:first-child
+      clear: none
+      float: left
+      width: 34%
+    &:nth-child(3n+2)
+      clear: right
+    p
+      padding: 0 20px 0 10px
+    h1
+      padding: 0 20px 30px 10px
+    h3
+      border-top: 3px solid #ccc
+      padding-top: 2px
+    .billboardCopyButtons
+      padding-top: 40px
+      text-align: center
+
+#homePopular
+  hr
+    margin-bottom: 60px
+  h2
+    padding-top: 0
+  .videoStandin
+    background: #333
+    height: 560px
+    text-align: center
+    width: 980px
+    &:after
+      color: #fff
+      content: "▶"
+      display: inline-block
+      font-size: 100px
+      padding-top: 25%
+
+// ADMIN SECTION ----------------------------------------------------
+
+#admin
+  .adminIndexTable
+    tr:nth-child(even)
+      background-color: rgba(#333, 0.1)
+    td:last-child
+      text-align: right
+      a
+        margin-left: 5px
+  h2
+    padding-bottom: 20px
+  hr
+    margin: 40px 0 20px
+  .adminColWr
+    padding: 0 10px
+    &:after
+      content: "."
+      display: block
+      clear: both
+      visibility: hidden
+      line-height: 0
+      height: 0
+  .adminCol
+    float: left
+    width: 48%
+  .adminCol, table
+    input[type="text"], select, textarea
+      @include boxShadIn(0,0,0,0,#000)
+      border: 0
+      background-color: rgba(#fff,0.5)
+      width: 100%
+      &.postEditTASmall
+        height: 70px
+  .adminCol + .adminCol
+    float: right
+
+#adminDisplay
+  padding-top: 20px
+  td
+    padding-right: 2%
+    vertical-align: top
+    width: 48%
+    iframe
+      height: auto !important
+      width: 300px !important
+    pre
+      font-size: 12px
+      line-height: 1.5
+      padding: 10px
+      white-space: pre-wrap
+      white-space: -moz-pre-wrap
+      white-space: -pre-wrap
+      white-space: -o-pre-wrap
+      word-wrap: break-word
+  td + td
+    padding: 36px 0 0 2%
+  .adminPrev ~ .adminPrev
+    padding-top: 30px
+  #prevTitle
+    h1
+      color: #333 !important
+      font-size: 30px !important
+      text-shadow: none !important
+      line-height: 1
+      padding-bottom: 20px
+    img
+      width: 50%
+

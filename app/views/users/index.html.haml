@@ -1,0 +1,20 @@
+#admin
+  .wrapper
+    %h2 
+      Users
+      %span= link_to '(New User)', new_user_path
+
+    %table.adminIndexTable
+      %tr
+        %th Name
+        %th Email
+        %th
+
+      - @users.each do |user|
+        %tr
+          %td= user.name
+          %td= user.email
+          %td
+            = link_to 'Show', user
+            = link_to 'Edit', edit_user_path(user)
+            = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }

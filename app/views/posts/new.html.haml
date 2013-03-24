@@ -1,0 +1,33 @@
+#admin
+  
+  .adminColWr
+    %h2 New post
+    
+    - if @post.errors.any?
+      #error_explanation
+        %h4= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+        %ul
+          - @post.errors.full_messages.each do |msg|
+            %li= msg
+            
+    = form_for @post do |f|
+      = render 'form', f: f
+
+      .clear
+      %hr
+
+      = render 'form_content', f: f
+
+      .actions= f.submit 'Save'
+
+
+:javascript   
+  $("#post_title").keyup(function(){
+    $('#prevTitle').html(this.value);
+  });
+  $("#post_video").keyup(function(){
+    $('#prevVideo').html(this.value);
+  });
+  $("#post_content").keyup(function(){
+    $('#prevContent').html(this.value);
+  });

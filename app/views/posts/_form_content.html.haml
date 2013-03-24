@@ -1,0 +1,33 @@
+%table#adminDisplay
+  %tr
+    %td
+      .field
+        = f.label :title
+        = f.text_area :title, class: "postEditTASmall"
+      %pre
+        :escaped
+          <h1 style = "color:#FAF7ED;text-shadow:0 1px 0 rgba(0,0,0,0.6)">I AM A TITLE FOOL</h1><img src="/assets/standin_beer.jpg" />
+    %td#prevTitle
+      != @post.title
+  %tr
+    %td
+      .field
+        = f.label :thumb_url
+        = f.text_field :thumb_url
+    %td#prevThumb
+      = image_tag "http://thetribe.s3.amazonaws.com/#{@post.thumb_url}"
+  - if @post.video?
+    %tr
+      %td
+        .field
+          = f.label :video
+          = f.text_area :video, class: "postEditTASmall"
+      %td#prevVideo
+        != @post.video
+  %tr
+    %td
+      .field
+        = f.label :content
+        = f.text_area :content
+    %td#prevContent
+      != @post.content

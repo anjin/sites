@@ -1,0 +1,26 @@
+#admin
+  .wrapper
+    %h2 
+      Index Settings
+      %span= link_to '(New Setting)', new_setting_path
+
+    %table
+      %tr
+        %th Name
+        %th Title
+        %th Link
+        %th Color
+        %th Count
+        %th
+
+      - @settings.each do |setting|
+        %tr
+          %td= setting.name
+          %td= setting.title
+          %td= setting.link
+          %td= setting.color
+          %td= setting.count
+          %td
+            = link_to 'Edit', edit_setting_path(setting)
+            = link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' }
+

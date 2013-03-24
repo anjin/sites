@@ -1,0 +1,25 @@
+%section#posting
+    
+  .wrapper
+    
+    -# <div class=""></div>
+    
+    .articleVideo!= @post.video
+    
+    %article.skySideContent
+      %header
+        %h1!= @post.title
+        = render "main/post_header"
+        
+      .postContent
+        != @post.content
+
+
+ 
+    %aside.skySideAside
+      sd
+  
+    .adBox s
+
+    %section.sectionTopsRow
+      sdf

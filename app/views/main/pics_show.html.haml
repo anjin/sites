@@ -1,0 +1,24 @@
+%section#posting
+    
+  .wrapper
+    
+    %article.skySideContent
+      %header
+        %h1!= @post.title
+        = render "main/post_header"
+        
+      .postContent
+        
+        -# <div class="picsContent">
+        -#   <img src="" />
+        -#   <em></em>
+        -# </div>
+        
+        != @post.content
+
+ 
+    %aside.skySideAside
+      sdf
+
+    %section.sectionTopsRow
+      sd

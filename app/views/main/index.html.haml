@@ -1,0 +1,34 @@
+- provide(:title, 'Home')
+
+.billboard.billboardFull
+  sdf
+
+.wrapper
+  %table.adminIndexTable
+    %tr
+      %th Name
+      %th Category
+      %th User
+      %th Published
+      %th
+
+    - @posts.each do |post|
+      %tr
+        %td
+          = link_to "upvote", ""
+          = link_to "downvote", ""
+          = post.title
+        %td= post.content
+        %td= post.user.name
+        %td= post.published
+        %td
+
+
+.wrapper#homePopular
+  %section.bigSideContent
+    asd
+          
+  %aside.bigSideAside
+    dfg
+  
+  .adBox sd

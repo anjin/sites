@@ -1,0 +1,17 @@
+#admin
+  .wrapper
+    %h2 
+      Categories
+      %span= link_to '(New Category)', new_category_path
+
+    %table.adminIndexTable
+      %tr
+        %th Name
+        %th
+
+      - @categories.each do |category|
+        %tr
+          %td= category.name
+          %td
+            = link_to 'Edit', edit_category_path(category)
+            = link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }

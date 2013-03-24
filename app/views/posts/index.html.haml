@@ -1,0 +1,30 @@
+#admin
+  .wrapper
+    %h2 
+      Posts
+      %span= link_to '(New Post)', new_post_path
+    -# <span>(<a href="">SEE MORE</a>)</span>
+
+    %table.adminIndexTable
+      %tr
+        %th Name
+        %th Category
+        %th User
+        %th Published
+        %th
+
+
+      - @posts.each do |post|
+        %tr
+          %td= post.name
+          %td= post.category
+          %td= post.user.name
+          %td= post.published
+          %td
+            = link_to 'Show', main_post_path(post)
+            = link_to 'Edit', edit_post_path(post)
+            = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
+
+    %br
+
+    

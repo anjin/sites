@@ -1,0 +1,32 @@
+#header
+  .flexWrapper
+    - if signed_in?
+      %nav#userMenu
+        %ul
+          %li= link_to "Posts", posts_path
+          - if admin?
+            %li= link_to "Settings", settings_path
+            %li= link_to "Posts", posts_path
+            %li= link_to "Tags", tags_path
+            %li= link_to "Categories", categories_path
+            %li= link_to "Users", users_path
+          %li= current_user.email
+          %li= link_to "Log Out", destroy_user_session_path, method: :delete 
+    - else
+      %nav#userMenu
+        %ul
+          %li= link_to "Register", "/users/sign_up"
+          %li= link_to "Sign in", "/users/sign_in"
+
+    %nav#menu
+      %ul
+        %li= link_to "Contribute", new_post_path, class: "btn"
+        %li
+          .dropbtn{onclick:''}
+            Categories
+            .dropMenu
+              %ul
+                - Category.order(:name).all.each do |category|
+                  %li= link_to category.name, "/stories/#{category.permalink}"
+
+    = link_to image_tag("logo"), "/", id: "logo", alt: "Unstppble"

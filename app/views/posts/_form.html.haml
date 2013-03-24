@@ -1,0 +1,27 @@
+.adminCol
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :tagline
+    = f.text_area :tagline, class: "postEditTASmall"
+  
+  - if admin?
+    .field
+      %label Publish Article    
+      %label.checkLabel{for: "post_published"}
+        = f.check_box :published
+        Live
+.adminCol
+  .field
+    = f.label :category
+    = f.select :category_id, Category.all.map{|c|[c.name, c.id]}
+  .field
+    = f.label :tags
+    - Tag.all.each do |tag|
+      %label.checkLabel
+        = check_box_tag "post[tag_ids][]", tag.id, @post.tags.include?(tag)
+        = tag
+
+    %label Comma delimited:
+    = f.text_field :add_tags

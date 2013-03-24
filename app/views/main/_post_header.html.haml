@@ -1,0 +1,11 @@
+.articleInfo
+  = link_to "", class: "articleByline" do
+    .gravatar
+    = @post.user.name
+  %span= @post.published_at.strftime("%A, %B %d, %Y") if @post.published && @post.published_at
+  %ul
+    - @post.tags.each do |tag|
+      %li= link_to tag, by_tag_path(tag)
+  = link_to "", class: "commentCount" do
+    %i.icon-comments
+    300

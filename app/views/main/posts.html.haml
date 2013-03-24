@@ -1,0 +1,31 @@
+- provide(:title, @group || "Posts")
+
+#catIndex
+  .wrapper
+    .adBox
+      = image_tag "ad_leader.png"
+    
+    %section.bigSideContent
+      
+      %h2= @group
+      
+      - @posts.each do |post|
+        %article.articleSnip
+          = link_to main_post_path(post) do
+            .articleSnipThumb= image_tag "http://thetribe.s3.amazonaws.com/#{post.thumb_url}"
+            .articleSnipCopy
+              %h4= post.name
+              %p 
+                = post.tagline
+                %span= post.published_at.strftime("%A, %B %d, %Y") if post.published && post.published_at
+                
+                
+              = link_to "", class: "commentCount" do
+                %i.icon-comments
+                300
+
+    %aside.bigSideAside
+      sdf
+    
+    .adBox
+      sd
