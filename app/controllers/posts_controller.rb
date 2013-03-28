@@ -17,6 +17,27 @@ class PostsController < ApplicationController
 
   end
 
+  def vote
+    @post = Post.accessible_by(current_ability).find_by_permalink params[:post_id]
+
+    if params[:direction] == 'up'
+      if current_user.voted_for?(@post)
+        redirect_to :back, notice: 'already voted up' and return
+      else
+        current_user.unvote_for @post
+        current_user.vote_for @post
+      end
+    else
+      if current_user.voted_against?(@post)
+        redirect_to :back, notice: 'already voted down' and return
+      else
+        current_user.unvote_for @post
+        current_user.vote_against @post
+      end
+    end
+    redirect_to :back, notice: "voted!"
+  end
+
   def create
     @post.user = current_user
 

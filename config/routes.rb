@@ -1,7 +1,9 @@
 Sites::Application.routes.draw do
-  
+
   devise_for :users
-  resources :posts
+  resources :posts do
+    get :vote
+  end
 
   scope "/admin" do
     resources :tags
@@ -14,7 +16,7 @@ Sites::Application.routes.draw do
     static_path = File.basename static_file, ".html.haml"
     get "#{static_path}" => "static##{static_path}"
   end
-  
+
   root :to => "main#index"
 
   get "posts(/:permalink)" => "main#posts"

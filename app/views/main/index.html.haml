@@ -15,9 +15,17 @@
     - @posts.each do |post|
       %tr
         %td
-          = link_to "upvote", ""
-          = link_to "downvote", ""
+          - if current_user
+            - if current_user.voted_against?(post) || !current_user.voted_on?(post)
+              = link_to "upvote", post_vote_path(post, direction: 'up')
+            - else
+              upvoted
+            - if current_user.voted_for?(post) || !current_user.voted_on?(post)
+              = link_to "downvote", post_vote_path(post, direction: 'down')
+            - else
+              downvoted
           = post.title
+          = post.plusminus
         %td= post.content
         %td= post.user.name
         %td= post.published
@@ -27,8 +35,8 @@
 .wrapper#homePopular
   %section.bigSideContent
     asd
-          
+
   %aside.bigSideAside
     dfg
-  
+
   .adBox sd

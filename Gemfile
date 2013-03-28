@@ -20,7 +20,7 @@ end
 
 group :test, :development do
   gem "rspec-rails", ">= 2.0"
-  gem "debugger"
+  gem "debugger2"
 end
 
 gem 'cancan'

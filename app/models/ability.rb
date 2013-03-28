@@ -7,10 +7,11 @@ class Ability
     can [:read, :create], Tag
 
     if user
+      can :vote, Post
       if user.admin?
         can :manage, :all
       else
-        can comment
+        # can comment
       end
     end
 
